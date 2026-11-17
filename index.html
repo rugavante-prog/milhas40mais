@@ -60,7 +60,7 @@ h2{font-size:24px;color:var(--fg)}
 .group p{margin-top:4px;font-size:14px;color:var(--muted-fg)}
 .car{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin:20px -20px 0;padding:0 20px 12px;scrollbar-width:none;overscroll-behavior-x:contain}
 .car::-webkit-scrollbar{display:none}
-.slide{flex:0 0 88vw;max-width:420px;scroll-snap-align:center;background:var(--card);border-radius:24px;padding:16px;box-shadow:var(--shadow-soft)}
+.slide{flex:0 0 74vw;max-width:320px;scroll-snap-align:center;background:var(--card);border-radius:24px;padding:16px;box-shadow:var(--shadow-soft)}
 .slide .ph{aspect-ratio:3/2}
 .mimg{width:100%;height:auto;border-radius:16px;border:1px solid var(--border);background:var(--card)}
 .slide p{margin-top:16px;font-size:14px;color:var(--fg)}
@@ -384,11 +384,11 @@ var VALOR={completo:37,basico:19.9};
 
 /* Carrossel: [emoji, categoria, subtítulo, [[nº do mapa, título], ...]] */
 var G=[
-["✈️","Entendendo Milhas","Descubra o que você já tem",[[1,"O que São Milhas e Pontos"],[2,"Smiles, Latam Pass e TudoAzul"],[3,"Livelo e Esfera"],[4,"Como Ver Seus Pontos"],[6,"Como Não Deixar Vencer"]]],
-["💳","Juntar Pontos sem Gastar Mais","Os pontos que você já está perdendo",[[11,"O Cartão que Mais Dá Pontos"],[12,"Transferência com Bônus"],[13,"Compras Online que Dão Pontos"],[14,"Contas do Dia a Dia no Cartão"],[15,"Clubes de Pontos Valem a Pena?"]]],
-["🎫","Emitir Passagem","Da milha ao bilhete na mão",[[21,"Emitindo na Smiles Passo a Passo"],[22,"Emitindo na Latam Pass"],[24,"As Melhores Datas"],[25,"Taxas que Você Vai Pagar"],[26,"Bagagem e Assento"]]],
-["🔎","Passagem Barata sem Milhas","Para quem ainda não tem pontos",[[31,"Google Flights Passo a Passo"],[32,"Alerta de Preço"],[33,"Baixa Temporada"],[34,"Conexões que Barateiam"],[35,"Dia da Semana Mais Barato"]]],
-["🏨","Hospedagem e Pacotes","Dormir bem pagando pouco",[[41,"Booking sem Pegadinha"],[42,"Cashback na Hospedagem"],[43,"Aluguel por Temporada"],[44,"Pacote All-inclusive Vale a Pena?"],[45,"Cancelamento Grátis"]]]
+["✈️","Entendendo Milhas","Descubra o que você já tem",[[1,"O que São Milhas e Pontos"],[4,"Como Ver Seus Pontos"],[6,"Como Não Deixar Vencer"]]],
+["💳","Juntar Pontos sem Gastar Mais","Os pontos que você já está perdendo",[[12,"Transferência com Bônus"],[13,"Compras Online que Dão Pontos"],[14,"Contas do Dia a Dia no Cartão"]]],
+["🎫","Emitir Passagem","Da milha ao bilhete na mão",[[21,"Emitindo na Smiles Passo a Passo"],[24,"As Melhores Datas"],[25,"Taxas que Você Vai Pagar"]]],
+["🔎","Passagem Barata sem Milhas","Para quem ainda não tem pontos",[[31,"Google Flights Passo a Passo"],[32,"Alerta de Preço"],[33,"Baixa Temporada"]]],
+["🏨","Hospedagem e Pacotes","Dormir bem pagando pouco",[[41,"Booking sem Pegadinha"],[42,"Cashback na Hospedagem"],[45,"Cancelamento Grátis"]]]
 ];
 /* Conteúdo do kit: [emoji, etapa, [títulos], mostrar "E muito mais"] */
 var K=[
@@ -407,7 +407,7 @@ var B=[
 ];
 function e(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 
-var h="";G.forEach(function(g,gi){h+='<div class="group"><h3>'+g[0]+' '+e(g[1])+'</h3><p>'+e(g[2])+'</p><div class="car" id="c'+gi+'">';g[3].forEach(function(m){var n=String(m[0]).padStart(2,"0"),src='img/mapas/mapa-'+n+'.webp';h+='<div class="slide"><img class="mimg" data-ph="'+src+'" src="'+src+'" width="640" height="427" alt="Mapa visual: '+e(m[1])+'" loading="lazy" decoding="async"><p>'+e(m[1])+'</p></div>'});h+='</div><div class="arrows"><button type="button" data-c="c'+gi+'" data-d="-1" aria-label="Ver mapas anteriores">‹</button><button type="button" data-c="c'+gi+'" data-d="1" aria-label="Ver mais mapas">›</button></div></div>'});
+var h="";G.forEach(function(g,gi){h+='<div class="group"><h3>'+g[0]+' '+e(g[1])+'</h3><p>'+e(g[2])+'</p><div class="car" id="c'+gi+'">';g[3].forEach(function(m){var n=String(m[0]).padStart(2,"0"),src='img/mapas/mapa-'+n+'.webp';h+='<div class="slide"><img class="mimg" data-ph="'+src+'" src="'+src+'" width="640" height="960" alt="Mapa visual: '+e(m[1])+'" loading="lazy" decoding="async"><p>'+e(m[1])+'</p></div>'});h+='</div><div class="arrows"><button type="button" data-c="c'+gi+'" data-d="-1" aria-label="Ver mapas anteriores">‹</button><button type="button" data-c="c'+gi+'" data-d="1" aria-label="Ver mais mapas">›</button></div></div>'});
 document.getElementById("groups").innerHTML=h;
 document.getElementById("groups").addEventListener("click",function(ev){var b=ev.target.closest("button");if(!b)return;var c=document.getElementById(b.dataset.c),s=c.firstElementChild,d=+b.dataset.d;if(!s)return;var max=c.scrollWidth-c.clientWidth,step=s.offsetWidth+16;if(d>0&&c.scrollLeft>=max-4){c.scrollTo({left:0,behavior:"smooth"});return}if(d<0&&c.scrollLeft<=4){c.scrollTo({left:max,behavior:"smooth"});return}c.scrollTo({left:Math.max(0,Math.min(max,c.scrollLeft+step*d)),behavior:"smooth"})});
 
